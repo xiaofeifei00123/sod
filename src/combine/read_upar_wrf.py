@@ -28,7 +28,7 @@ Version          :1.1
 # %%
 import xarray as xr
 import os
-import xesmf as xe
+# import xesmf as xe
 import numpy as np
 import pandas as pd
 import netCDF4 as nc
@@ -36,7 +36,7 @@ import wrf
 from multiprocessing import Pool
 # from read_global import caculate_diagnostic, regrid_xesmf
 from baobao.caculate import caculate_q_rh_thetav# , caculate_vo_div_wrf
-from baobao.interp import regrid_xesmf
+# from baobao.interp import regrid_xesmf
 # from baobao.coord_transform import xy_ll
 
 # from wrf import getvar
@@ -189,7 +189,7 @@ def combine():
     处理两种模式，不同时次的数据
     """
     path_main = '/home/fengx20/project/sod/data_original/wrfout/'
-    path_save = '/home/fengx20/project/sod/data_combine/'
+    path_to= '/home/fengx20/project/sod/data_combine/'
     model_list = ['sod_all', 'sod_bl', 'sod_fd', 'sod_ss', 'sod_ss', 'sod_no']
     print("单独保存每个模式的数据")
     for model in model_list:
@@ -203,7 +203,7 @@ def combine():
         ds = xr.open_dataset(path_save)
         ds_list.append(ds)
     ds2 = xr.concat(ds_list,pd.Index(model_list,name='model'))
-    ds2.to_netcdf(path_save+'/upar.nc')
+    ds2.to_netcdf(path_to+'/upar.nc')
         # ds
         # ds.to_netcdf(path_save+'upar.nc')
 

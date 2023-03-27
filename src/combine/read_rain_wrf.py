@@ -254,7 +254,9 @@ class TimeRain(Rain):
         """处理多个模式的数据
         """
         ##### 对于不同试验需要修改的地方
-        model_list = ['sod_all', 'sod_bl', 'sod_fd', 'sod_ss', 'sod_ss', 'sod_no']
+        model_list = ['sod_all', 'sod_bl', 'sod_fd', 'sod_ls', 'sod_ss', 'sod_no', 'sod_scale_aware', 'sod_ss_fd', 'Run05', 'Run15']
+        # model_list = ['sod_scale_aware', 'sod_ss_fd']
+        # model_list = ['sod_all','Run05', 'Run15']
         domain = 'wrfout_d03'
         # flag = 'all'
         # flag_list = ['all','convection', 'grid']
@@ -282,6 +284,7 @@ class TimeRain(Rain):
                 # self.save_one(path_main, domain, flag)
                 flnm = path_main+flag+'.nc'
                 da = xr.open_dataarray(flnm)
+                da.name = 'precip'
                 rain_list.append(da)
             ds = xr.concat(rain_list,pd.Index(model_list,name='model'))
             ds.to_netcdf(path_out+'/rain_'+flag+'.nc')

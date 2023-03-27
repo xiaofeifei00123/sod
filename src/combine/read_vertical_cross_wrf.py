@@ -21,8 +21,10 @@ from multiprocessing import Pool
 # import cartopy.crs as crs
 # from cartopy.feature import NaturalEarthFeature
 from baobao.caculate import caculate_pdiv3d, caculate_pvor3d, caculate_div3d, caculate_vor3d
-from common import Common
+import sys
 import os
+sys.path.append('../caculate')
+from common import Common
 
 # %%
 # flnm = '/mnt/zfm_18T/fengxiang/HeNan/Data/GWD/d03/newall/GWD3/wrfout/cross4_1time.nc'
@@ -255,7 +257,7 @@ def save_one_model_mp(path):
     #     fl_list.append(flnm)
 
     fl_list = os.popen('ls {}/wrfout_d03*'.format(path))  # 打开一个管道
-    fl_list = fl_list.read().split()
+    fl_list = fl_list.read().split()[0:5]
 
     pool = Pool(13)
     result = []
@@ -279,7 +281,7 @@ def save_one_model_mp(path):
 
     ds = ds.rename({'Time':'time'})
     # save_name = path+'cross4_times.nc'
-    save_name = path+'cross9_1time.nc'
+    save_name = path+'cross_1time.nc'
     # save_name = path+'cross5_d03_1time.nc'
     ds.to_netcdf(save_name)
 
