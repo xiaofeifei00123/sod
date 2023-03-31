@@ -97,7 +97,8 @@ def get_tbb_obs(flnm_hdf):
     lon2d , lat2d = get_lonlat(flnm_hdf, flnm_dat)
 
     ## 目标网格
-    interval = 0.125
+    # interval = 0.125
+    interval = 0.1
     lon_grid = np.arange(100-1, 120+1+interval, interval)
     lat_grid = np.arange(25-1, 40+1+interval, interval)
     lon_gridmesh, lat_gridmesh = np.meshgrid(lon_grid, lat_grid)

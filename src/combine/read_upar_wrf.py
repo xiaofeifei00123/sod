@@ -211,10 +211,9 @@ def combine():
 
 # %%
 if __name__ == '__main__':
-    ### combine和regrid一般不同时进行
-    combine()
-    # regrid_dual()
-    # combine_one()
-    # regrid_one()
-    # combine() 
-    # regrid()
+    path_wrfout = '/home/fengx20/project/sod/data_original/wrfout/'
+    gu = GetUpar()
+    print(path_wrfout)
+    ds = gu.get_upar(path_wrfout)
+    path_save = os.path.join(path_wrfout, 'upar.nc')
+    ds.to_netcdf(path_save)

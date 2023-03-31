@@ -137,7 +137,7 @@ class Draw(object):
             print("出错啦")
             
         # ax.set_title('Max = %s'%(rain_max.values.round(1)), fontsize=10,loc='right')
-        ax.set_title('Max = 626.9', fontsize=10,loc='right')
+        # ax.set_title('Max = 626.9', fontsize=10,loc='right')
 
         x = da.lon
         y = da.lat

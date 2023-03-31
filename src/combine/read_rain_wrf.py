@@ -266,34 +266,35 @@ class TimeRain(Rain):
         flag_list = ['all']
 
         # ###### 以下不需要修改
-        # print("读取保存单个模式数据")
-        # for model in model_list:
-        #     print(model)
-        #     path_main = path+model+'/'
-        #     # path_main = '/mnt/zfm_18T/fengxiang/HeNan/Data/GWD/d03/'+model+'/'
-        #     for flag in flag_list:
-        #         self.save_one(path_main, domain, flag)
+        print("读取保存单个模式数据")
+        for model in model_list:
+            print(model)
+            path_main = path+model+'/'
+            # path_main = '/mnt/zfm_18T/fengxiang/HeNan/Data/GWD/d03/'+model+'/'
+            for flag in flag_list:
+                self.save_one(path_main, domain, flag)
 
         ## 将所有数据读取，然后合并保存
-        print("合并多模式数据")
-        for flag in flag_list:
-            rain_list = []
-            for model in model_list:
-                print(model)
-                path_main = path+model+'/rain_'
-                # self.save_one(path_main, domain, flag)
-                flnm = path_main+flag+'.nc'
-                da = xr.open_dataarray(flnm)
-                da.name = 'precip'
-                rain_list.append(da)
-            ds = xr.concat(rain_list,pd.Index(model_list,name='model'))
-            ds.to_netcdf(path_out+'/rain_'+flag+'.nc')
+        # print("合并多模式数据")
+        # for flag in flag_list:
+        #     rain_list = []
+        #     for model in model_list:
+        #         print(model)
+        #         path_main = path+model+'/rain_'
+        #         # self.save_one(path_main, domain, flag)
+        #         flnm = path_main+flag+'.nc'
+        #         da = xr.open_dataarray(flnm)
+        #         da.name = 'precip'
+        #         rain_list.append(da)
+        #     ds = xr.concat(rain_list,pd.Index(model_list,name='model'))
+        #     ds.to_netcdf(path_out+'/rain_'+flag+'.nc')
             
             
 
 # %%
 if __name__ == '__main__':
     tr = TimeRain()
-    tr.store_combine()
+    tr.store_single()
+    # tr.store_combine()
 
     
